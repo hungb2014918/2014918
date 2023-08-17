@@ -12,10 +12,6 @@ output_details = interpreter.get_output_details()
 input_shape = input_details[0]['shape']
 
 outname = output_details[0]['name']
-if ('StatefulPartitionedCall' in outname): # This is a TF2 model
-    boxes_idx, classes_idx, scores_idx = 1, 3, 0
-else: # This is a TF1 model
-    boxes_idx, classes_idx, scores_idx = 0, 1, 2
 
 cap = cv2.VideoCapture(0)
 
