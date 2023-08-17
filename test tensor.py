@@ -31,6 +31,10 @@ while True:
     output_data = interpreter.get_tensor(output_details[0]['index'])
     print("output data", output_data)
 
+    boxes = interpreter.get_tensor(output_details[boxes_idx]['index'])[0]
+    classes = interpreter.get_tensor(output_details[classes_idx]['index'])[0]
+    scores = interpreter.get_tensor(output_details[scores_idx]['index'])[0]
+
     # Display the resulting frame
     cv2.imshow('Object Detection', frame)
 
