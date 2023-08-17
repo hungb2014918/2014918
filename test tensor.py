@@ -6,8 +6,10 @@ import tensorflow as tf
 model_path = 'D:/model_data/best_float32 (1).tflite'
 interpreter = tf.lite.Interpreter(model_path=model_path)
 interpreter.allocate_tensors()
+
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
+input_shape = input_details[0]['shape']
 
 outname = output_details[0]['name']
 if ('StatefulPartitionedCall' in outname): # This is a TF2 model
@@ -15,11 +17,6 @@ if ('StatefulPartitionedCall' in outname): # This is a TF2 model
 else: # This is a TF1 model
     boxes_idx, classes_idx, scores_idx = 0, 1, 2
 
-input_details = interpreter.get_input_details()
-output_details = interpreter.get_output_details()
-input_shape = input_details[0]['shape']
-
-# Open a connection to the webcam (change the index if you have multiple cameras)
 cap = cv2.VideoCapture(0)
 
 while True:
